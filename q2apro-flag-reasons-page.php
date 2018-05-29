@@ -127,10 +127,7 @@ class q2apro_flag_reasons_page
 					}
 					
 					// save the flag reason in the plugin table
-					qa_db_query_sub('
-						INSERT INTO `^flagreasons` (`userid`, `postid`, `reasonid`, `notice`) 
-						VALUES (#, #, #, $)
-					', $userid, $postid, $reasonid, $notice);
+					q2apro_save_flagreasons($userid, $postid, $reasonid, $notice);
 				}
 			}
 			else if($posttype == 'a')
@@ -166,10 +163,7 @@ class q2apro_flag_reasons_page
 					}
 					
 					// save the flag reason in the plugin table
-					qa_db_query_sub('
-						INSERT INTO `^flagreasons` (`userid`, `postid`, `reasonid`, `notice`) 
-						VALUES (#, #, #, $)
-					', $userid, $postid, $reasonid, $notice);
+					q2apro_save_flagreasons($userid, $postid, $reasonid, $notice);
 				}
 			}
 			else if($posttype == 'c')
@@ -202,10 +196,7 @@ class q2apro_flag_reasons_page
 					}
 					
 					// save the flag reason in the plugin table
-					qa_db_query_sub('
-						INSERT INTO `^flagreasons` (`userid`, `postid`, `reasonid`, `notice`) 
-						VALUES (#, #, #, $)
-					', $userid, $postid, $reasonid, $notice);
+					q2apro_save_flagreasons($userid, $postid, $reasonid, $notice);
 				}
 			}
 

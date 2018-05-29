@@ -115,3 +115,17 @@ function q2apro_count_postflags_output($postid)
 	
 	return $flagoutput;	
 }
+
+
+function q2apro_save_flagreasons($userid, $postid, $reasonid, $notice)
+{
+	qa_db_query_sub('
+		INSERT INTO `^flagreasons` (`userid`, `postid`, `reasonid`, `notice`) 
+		VALUES (#, #, #, $)
+		ON DUPLICATE KEY
+		UPDATE `userid`=#, `postid`=#, `reasonid`=#, `notice`=$
+	', 
+	$userid, $postid, $reasonid, $notice,
+	$userid, $postid, $reasonid, $notice
+	);
+}
