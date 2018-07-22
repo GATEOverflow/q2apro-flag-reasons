@@ -196,7 +196,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 				if(!empty($flaginfo))
 				{
 					// add flag info to flag output
-					$post['flags']['suffix'] .= ': <br>'.$flaginfo;
+					$post['flags']['suffix'] .= ': <br>'.htmlspecialchars($flaginfo);
 				}
 			}
 		}
