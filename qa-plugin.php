@@ -119,6 +119,8 @@ function q2apro_count_postflags_output($postid)
 
 function q2apro_save_flagreasons($userid, $postid, $reasonid, $notice)
 {
+	$notice = strip_tags($notice);
+	
 	qa_db_query_sub('
 		INSERT INTO `^flagreasons` (`userid`, `postid`, `reasonid`, `notice`) 
 		VALUES (#, #, #, $)
