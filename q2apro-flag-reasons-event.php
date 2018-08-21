@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: On-Site-Notifications
+	Plugin Name: q2apro Flag Reasons
 */
 
 class q2apro_flagreasons_event
