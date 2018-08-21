@@ -22,7 +22,8 @@ class q2apro_flagreasons_event
 		}
 		
 		// admin, editor or moderator removes all flags of post
-		$flagevents2 = array('q_clearflags', 'a_clearflags', 'c_clearflags');
+		// flags must also be deleted when post is deleted, otherwise they stay in DB forever
+		$flagevents2 = array('q_clearflags', 'a_clearflags', 'c_clearflags', 'q_delete', 'a_delete', 'c_delete');
 		
 		if(in_array($event, $flagevents2))
 		{
