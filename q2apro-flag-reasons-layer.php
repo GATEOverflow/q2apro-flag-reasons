@@ -105,6 +105,10 @@ class qa_html_theme_layer extends qa_html_theme_base
 							<input type="radio" name="qa-spam-reason-radio" value="6">
 							<span>'.q2apro_flag_reasonid_to_readable(6).'</span>
 						</label>
+						<label>
+							<input type="radio" name="qa-spam-reason-radio" value="7">
+							<span>'.q2apro_flag_reasonid_to_readable(7).'</span>
+						</label>
 						
 						<div class="qa-spam-reason-text-wrap">
 							<p>

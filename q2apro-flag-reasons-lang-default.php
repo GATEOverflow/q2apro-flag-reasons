@@ -10,6 +10,8 @@ return array(
 	'reason_rude' => 'Insulting',
 	'reason_edit' => 'Edit necessary',
 	'reason_duplicate' => 'Duplicate',
+	'reason_copied' => 'Copied',
+	'reason_prohibited' => 'Prohibited',
 	'reason_offtopic' => 'Off-topic',
 	'reason_migrate' => 'Migrate',
 	'reason_close' => 'Close',

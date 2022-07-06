@@ -61,27 +61,31 @@ function q2apro_flag_reasonid_to_readable($reasonid)
 	
 	switch($reasonid)
 	{
-		case 1:
-			return qa_lang('q2apro_flagreasons_lang/reason_quality');
-			break;
-		case 2:
-			return qa_lang('q2apro_flagreasons_lang/reason_spam');
-			break;
-		case 3:
-			return qa_lang('q2apro_flagreasons_lang/reason_rude');
-			break;
-		case 4:
-			return qa_lang('q2apro_flagreasons_lang/reason_edit');
-			break;
-		case 5:
-			return qa_lang('q2apro_flagreasons_lang/reason_duplicate');
-			break;
-		case 6:
-			return qa_lang('q2apro_flagreasons_lang/reason_migrate');
-			break;
-		default: 
-			return '';
-	}
+                case 1:
+                        return qa_lang('q2apro_flagreasons_lang/reason_quality');
+                        break;
+                case 2:
+                        return qa_lang('q2apro_flagreasons_lang/reason_spam');
+                        break;
+                case 3:
+                        return qa_lang('q2apro_flagreasons_lang/reason_rude');
+                        break;
+                case 4:
+                        return qa_lang('q2apro_flagreasons_lang/reason_edit');
+                        break;
+                case 5:
+                        return qa_lang('q2apro_flagreasons_lang/reason_duplicate');
+                        break;
+                case 6:
+                        return qa_lang('q2apro_flagreasons_lang/reason_copied');
+                        break;
+                case 7:
+                        return qa_lang('q2apro_flagreasons_lang/reason_prohibited');
+                        break;
+                default:
+                        return '';
+        }
+
 }
 
 function q2apro_get_postflags($postid)
