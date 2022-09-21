@@ -13,6 +13,7 @@ class q2apro_flagreasons_admin
 		if(!in_array($tablename, $tableslc)) 
 		{
 			require_once QA_INCLUDE_DIR.'qa-app-users.php';
+			// require_once QA_INCLUDE_DIR.'app/users.php'; ------ Q2A DEV version ------
 
 			return '
 				CREATE TABLE `^flagreasons` (
