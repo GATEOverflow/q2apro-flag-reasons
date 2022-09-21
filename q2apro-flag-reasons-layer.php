@@ -95,15 +95,15 @@ class qa_html_theme_layer extends qa_html_theme_base
 								<span>'.q2apro_flag_reasonid_to_readable(3).'</span>
 							</label>
 							<label>
-								<input type="radio" name="qa-spam-reason-radio" value="4" id="isFlagEditNecessary" class="qa-spam-radio qa-reqi">
+								<input type="radio" name="qa-spam-reason-radio" value="4" class="qa-spam-radio">
 								<span>'.q2apro_flag_reasonid_to_readable(4).'</span>
 							</label>
 							<label>
-								<input type="radio" name="qa-spam-reason-radio" value="5" id="isFlagDuplicate" class="qa-spam-radio qa-reqi">
+								<input type="radio" name="qa-spam-reason-radio" value="5" class="qa-spam-radio">
 								<span>'.q2apro_flag_reasonid_to_readable(5).'</span>
 							</label>
 							<label>
-								<input type="radio" name="qa-spam-reason-radio" value="6" id="isFlagCopied" class="qa-spam-radio qa-reqi">
+								<input type="radio" name="qa-spam-reason-radio" value="6" class="qa-spam-radio">
 								<span>'.q2apro_flag_reasonid_to_readable(6).'</span>
 							</label>
 							<label>

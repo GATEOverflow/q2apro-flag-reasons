@@ -8,7 +8,7 @@
 	margin:10px 0 30px 0;
 	text-align:left;
 	z-index:3335;
-	max-height: 75vh;
+	max-height: 78vh;
     overflow-y: auto;
 }
 .qa-flag-reasons-wrap .closer {
@@ -28,6 +28,9 @@
 #qa-reason-form {
     min-width: 227px;
 }
+#qa-reason-form label {
+    cursor: pointer;
+}
 .qa-flag-reasons-wrap h4 {
 	margin-bottom:10px;
 }
@@ -44,7 +47,8 @@ input[name="qa-spam-reason-radio"]:checked+span { font-weight: bold; }
 	margin-top: 1rem;
 }
 .qa-spam-reason-text-wrap p {
-    margin-bottom: 0.3rem;
+    margin-top: 2rem;
+	margin-bottom: 0.3rem;
 }
 .qa-spam-reason-text {
 	padding:7px;
