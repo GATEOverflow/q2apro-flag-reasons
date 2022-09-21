@@ -211,7 +211,6 @@ class qa_html_theme_layer extends qa_html_theme_base
 					}
 					
 					// add flag info to flag output
-					$postFlagSuffix = $post['flags']['suffix'];
 					$post['flags']['prefix'] = '<div class="qa-flag-reason-container '.$reason.'">' . $post['flags']['prefix'];
 					$post['flags']['suffix'] .= '<div class="qa-flag-reason-text">See Reason</div><div class="qa-flag-reason">'. $flaginfo .'</div></div>'; // last div closes - qa-flag-reason-container
 				}
