@@ -81,40 +81,43 @@ class qa_html_theme_layer extends qa_html_theme_base
 						<h4>
 							'.qa_lang('q2apro_flagreasons_lang/reason').'
 						</h4>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="1" checked>
-							<span>'.q2apro_flag_reasonid_to_readable(1).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="2">
-							<span>'.q2apro_flag_reasonid_to_readable(2).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="3">
-							<span>'.q2apro_flag_reasonid_to_readable(3).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="4">
-							<span>'.q2apro_flag_reasonid_to_readable(4).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="5">
-							<span>'.q2apro_flag_reasonid_to_readable(5).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="6">
-							<span>'.q2apro_flag_reasonid_to_readable(6).'</span>
-						</label>
-						<label>
-							<input type="radio" name="qa-spam-reason-radio" value="7">
-							<span>'.q2apro_flag_reasonid_to_readable(7).'</span>
-						</label>
+						<form id="qa-reason-form">
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="1" class="qa-spam-radio" checked>
+								<span>'.q2apro_flag_reasonid_to_readable(1).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="2" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(2).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="3" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(3).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="4" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(4).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="5" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(5).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="6" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(6).'</span>
+							</label>
+							<label>
+								<input type="radio" name="qa-spam-reason-radio" value="7" class="qa-spam-radio">
+								<span>'.q2apro_flag_reasonid_to_readable(7).'</span>
+							</label>
+						</form>
 						
 						<div class="qa-spam-reason-text-wrap">
 							<p>
 								'.qa_lang('q2apro_flagreasons_lang/note').'
 							</p>
-							<input type="text" name="qa-spam-reason-text" class="qa-spam-reason-text" placeholder="'.qa_lang('q2apro_flagreasons_lang/enter_details').'">
+							<input type="text" name="qa-spam-reason-text" class="qa-spam-reason-text" placeholder="'.qa_lang('q2apro_flagreasons_lang/enter_details').'"/>
+							<small class="qa-flag-show-error"></small>
 						</div>
 						
 						<input type="button" class="qa-gray-button qa-go-flag-send-button" value="'.qa_lang('q2apro_flagreasons_lang/send').'">
@@ -199,8 +202,17 @@ class qa_html_theme_layer extends qa_html_theme_base
 				
 				if(!empty($flaginfo))
 				{
+					// Get reason loop
+					$postid = $post['raw']['postid'];
+					$flagreasons = q2apro_get_postflags($postid);
+					foreach($flagreasons as $f) {
+						$reason = 'qafr-' . q2apro_flag_reasonid_to_readable($f['reasonid']);
+						$reason = str_replace(" ", "-", strtolower($reason));
+					}
+					
 					// add flag info to flag output
-					$post['flags']['suffix'] .= ': <br>'.$flaginfo;
+					$post['flags']['prefix'] = '<div class="qa-flag-reason-container '.$reason.'">' . $post['flags']['prefix'];
+					$post['flags']['suffix'] .= '<div class="qa-flag-reason-text">See Reason</div><div class="qa-flag-reason">'. $flaginfo .'</div></div>'; // last div closes - qa-flag-reason-container
 				}
 			}
 		}

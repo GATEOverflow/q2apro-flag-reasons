@@ -4,15 +4,17 @@
 	position:relative;
 	background:#FFC;
 	border:1px solid #FCC;
-	padding:35px;
+	padding: 1rem 3rem 2rem 3rem;
 	margin:10px 0 30px 0;
 	text-align:left;
 	z-index:3335;
+	max-height: 78vh;
+    overflow-y: auto;
 }
 .qa-flag-reasons-wrap .closer {
 	position:absolute;
-	top:5px;
-	right:7px;
+	top:1rem;
+	right:1rem;
 	font-size:20px;
 	color:#333;
 	cursor:pointer;
@@ -22,6 +24,12 @@
 	height:20px;
 	line-height: 20px;
 	text-align:center;
+}
+#qa-reason-form {
+    min-width: 227px;
+}
+#qa-reason-form label {
+    cursor: pointer;
 }
 .qa-flag-reasons-wrap h4 {
 	margin-bottom:10px;
@@ -36,11 +44,29 @@ input[name="qa-spam-reason-radio"] {
 input[name="qa-spam-reason-radio"]:checked+span { font-weight: bold; }
 .qa-spam-reason-text-wrap {
 	display:block;
-	margin:20px 0 10px 0;
+	margin-top: 1rem;
+}
+.qa-spam-reason-text-wrap p {
+    margin-top: 2rem;
+	margin-bottom: 0.3rem;
 }
 .qa-spam-reason-text {
 	padding:7px;
+	width: 100%;
 	height:auto;
+	border-radius: 3px;
+}
+.qa-flag-show-error {
+    display: block;
+    color: #f83052;
+    font-size: .75rem;
+	font-weight: bold;
+}
+.flag-submit-successful {
+    color: #3dbc8d;
+}
+.flag-submit-amber {
+    color: #f50;
 }
 .qa-go-flag-send-button {
 	margin-top:15px;
@@ -80,4 +106,69 @@ input[name="qa-spam-reason-radio"]:checked+span { font-weight: bold; }
 	background:#ffcd41;
 	color:#333;
 	border:1px solid #F9A;
+}
+
+.qa-flag-reason-container {
+    display: inline-block;
+	font-size: .75rem;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 30px;
+}
+
+.qa-c-item-flags .qa-flag-reason-container {
+    line-height: normal;
+	font-weight: normal;
+	padding-left: 7px;
+}
+
+.qa-flag-reason-text {
+    display: inline-block;
+    background-color: #fddee4;
+    margin-left: 6px;
+    padding: 2px 10px 2px 7px;
+    cursor: pointer;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.qa-flag-reason-text:hover {
+    background-color: #ffd2da;
+}
+
+.qa-c-item-flags .qa-flag-reason-text {
+    padding: 3px 7px 3px 5px;
+	margin-left: 4px;
+}
+
+.qa-flag-reason {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    z-index: 2;
+    background-color: #fff;
+    background-color: rgb(0 0 0 / 88%);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    /* box-shadow: 0 19px 38px rgb(0 0 0 / 30%), 0 15px 12px rgb(0 0 0 / 22%); */
+    display: none;
+}
+.qa-flag-reason.qa-show-flag-reason {
+    display: block;
+}
+
+.qa-flag-reason:before {
+    content: "";
+    position: absolute;
+    /* top: 100%; */
+    right: 3rem;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    /* border-top: 8px solid #ffffff; */
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 6px solid rgb(0 0 0 / 88%);
+    font-size: 0;
+    line-height: 0;
 }
