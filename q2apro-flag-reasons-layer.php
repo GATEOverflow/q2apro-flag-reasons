@@ -140,7 +140,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 		qa_html_theme_base::post_tags($post, $class);
 		
 		// question
-		if($class=='qa-q-view')
+		if($class=='qa-q-view' && $this->template=="question")
 		{
 			$postid = $post['raw']['postid'];
 			
