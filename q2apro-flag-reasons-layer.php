@@ -7,6 +7,99 @@
 class qa_html_theme_layer extends qa_html_theme_base
 {
 	
+	// Cache of flag reasons keyed by postid, loaded in batch for the admin/flagged page
+	private $flagreasons_cache = null;
+
+	/**
+	 * Override q_list_items to batch-load flag reasons for the admin/flagged page.
+	 */
+	public function q_list_items($q_items)
+	{
+		if ($this->template == 'admin' && qa_request() === 'admin/flagged' && !empty($q_items)) {
+			// Collect all relevant post IDs (opostid for answers/comments, postid for questions)
+			$postids = array();
+			foreach ($q_items as $q_item) {
+				if (isset($q_item['raw']['opostid'])) {
+					$postids[] = (int)$q_item['raw']['opostid'];
+				} elseif (isset($q_item['raw']['postid'])) {
+					$postids[] = (int)$q_item['raw']['postid'];
+				}
+			}
+
+			if (!empty($postids)) {
+				$postids = array_unique($postids);
+				$id_list = implode(',', $postids);
+
+				$rows = qa_db_read_all_assoc(
+					qa_db_query_sub(
+						'SELECT fr.userid, fr.postid, fr.reasonid, fr.notice, u.handle '
+						. 'FROM ^flagreasons fr '
+						. 'LEFT JOIN ^users u ON u.userid = fr.userid '
+						. 'WHERE fr.postid IN (' . $id_list . ') '
+						. 'ORDER BY fr.postid, fr.reasonid'
+					)
+				);
+
+				$this->flagreasons_cache = array();
+				foreach ($rows as $row) {
+					$pid = (int)$row['postid'];
+					if (!isset($this->flagreasons_cache[$pid])) {
+						$this->flagreasons_cache[$pid] = array();
+					}
+					$this->flagreasons_cache[$pid][] = $row;
+				}
+			} else {
+				$this->flagreasons_cache = array();
+			}
+		}
+
+		qa_html_theme_base::q_list_items($q_items);
+	}
+
+	/**
+	 * Override q_item_buttons to append flag reasons on the admin/flagged page.
+	 */
+	public function q_item_buttons($q_item)
+	{
+		qa_html_theme_base::q_item_buttons($q_item);
+
+		if ($this->template == 'admin' && qa_request() === 'admin/flagged') {
+			$postid = isset($q_item['raw']['opostid']) ? (int)$q_item['raw']['opostid'] : (int)@$q_item['raw']['postid'];
+
+			if ($postid <= 0) return;
+
+			// Use batch-loaded cache if available, otherwise fall back to per-post query
+			if ($this->flagreasons_cache !== null) {
+				$flagreasons = isset($this->flagreasons_cache[$postid]) ? $this->flagreasons_cache[$postid] : array();
+			} else {
+				$flagreasons = q2apro_get_postflags($postid);
+			}
+
+			if (!empty($flagreasons)) {
+				$html = '<div class="qa-flagreasons-admin" style="margin-top:8px; padding:8px 12px; background:#fff8e1; border:1px solid #ffe082; border-radius:4px; font-size:13px;">';
+				$html .= '<strong style="color:#f57f17;">Flag Reasons:</strong>';
+				$html .= '<ul style="margin:4px 0 0 0; padding-left:18px; list-style:none;">';
+
+				foreach ($flagreasons as $f) {
+					$handle = isset($f['handle']) ? $f['handle'] : qa_userid_to_handle($f['userid']);
+					$reason = q2apro_flag_reasonid_to_readable($f['reasonid']);
+					$notice = '';
+
+					if (!empty($f['notice'])) {
+						$notice = ' | <span style="color:#666;">💬 "' . qa_html($f['notice']) . '"</span>';
+					}
+
+					$html .= '<li style="margin:2px 0;">🚩 ' . qa_html($reason)
+						. ' | 👮 <a href="' . qa_path_html('user/' . $handle) . '">' . qa_html($handle) . '</a>'
+						. $notice . '</li>';
+				}
+
+				$html .= '</ul></div>';
+				$this->output($html);
+			}
+		}
+	}
+
 	function head_script()
 	{
 		qa_html_theme_base::head_script();
