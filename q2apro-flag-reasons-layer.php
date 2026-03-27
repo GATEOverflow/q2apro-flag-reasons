@@ -263,7 +263,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 					<li>
 						<span class="flagreason-what">🚩 '.$reason.'</span>
 						| 
-						<span class="flagreason-who">👮 <a href="'.qa_path('user').'/'.$userhandle.'">'.$userhandle.'</a></span>
+						<span class="flagreason-who">👮 <a href="'.qa_path_html('user/'.$userhandle).'">'.$userhandle.'</a></span>
 						'.$notice.'
 					</li>
 					';
